@@ -29,3 +29,18 @@ No analysis code has been added. No client work or experimental certification is
 6. Prepare a short case study and demonstration video.
 
 For each milestone, record what changed, what was checked, the result, unresolved questions and who performed the verification. Commit messages should describe actual changes; Git history records development, not scientific accuracy by itself.
+
+## Milestone 1 — workbook inspection and measurement import
+
+Implemented and run locally with AI guidance:
+
+- Listed workbook sheets and previewed their contents.
+- Identified Sheet1 as metadata and source-reported results.
+- Identified Excel row 2 as the measurement header in Sheet2.
+- Loaded 4,668 measurement rows and five columns.
+- Checked for missing entries: Pandas reported zero in each column.
+- Preserved the original experimental workbook.
+
+These checks establish successful import, not experimental accuracy.
+Numerical validity, timestamps, specimen metadata and calculations
+remain to be checked.
