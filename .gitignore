@@ -25,3 +25,13 @@ outputs/*
 
 # Temporary LibreOffice lock files
 .~lock.*#
+
+# Selected reproducible portfolio outputs
+!outputs/1018_run_276_engineering_stress.csv
+!outputs/1018_run_276_stress_time.png
+!outputs/1018_run_276_stress_time.pdf
+
+# Selected reproducible portfolio outputs
+!outputs/1018_run_276_engineering_stress.csv
+!outputs/1018_run_276_stress_time.png
+!outputs/1018_run_276_stress_time.pdf
