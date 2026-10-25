@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "status": "pass_with_warnings",
+  "checks": [
+    {
+      "name": "input_checksum",
+      "status": "pass",
+      "message": "Compared bundled input bytes with data/raw/SHA256SUMS."
+    },
+    {
+      "name": "workbook_read",
+      "status": "pass",
+      "message": "Read Sheet1 metadata and Sheet2 measurements (header on Excel row 2)."
+    },
+    {
+      "name": "measurements",
+      "status": "pass",
+      "message": "Required labels, row count, finite numbers and strictly increasing time."
+    },
+    {
+      "name": "geometry",
+      "status": "pass",
+      "message": "Original area agrees with width × thickness within the absolute tolerance."
+    },
+    {
+      "name": "stress_calculation",
+      "status": "pass",
+      "message": "Calculated finite engineering stress from original area; existing stress, if present, agrees."
+    },
+    {
+      "name": "peak_comparison",
+      "status": "pass",
+      "message": "Peak stress agrees with the reported value within the absolute tolerance."
+    },
+    {
+      "name": "csv_round_trip",
+      "status": "pass",
+      "message": "Reloaded CSV exactly preserves the derived table."
+    },
+    {
+      "name": "figure_export",
+      "status": "pass",
+      "message": "Generated PNG and PDF from validated engineering stress."
+    }
+  ],
+  "warnings": [
+    {
+      "code": "negative_readings",
+      "column": "Load (N)",
+      "count": 1,
+      "message": "Load (N): 1 negative readings retained; contextual review needed."
+    },
+    {
+      "code": "negative_readings",
+      "column": "Crosshead (mm)",
+      "count": 24,
+      "message": "Crosshead (mm): 24 negative readings retained; contextual review needed."
+    },
+    {
+      "code": "negative_readings",
+      "column": "Extensometer (mm)",
+      "count": 72,
+      "message": "Extensometer (mm): 72 negative readings retained; contextual review needed."
+    }
+  ],
+  "artifacts": [
+    {
+      "filename": "4130_run_280_engineering_stress.csv",
+      "sha256": "58935fd5bf8fc0c58deaab62e281b702b29f4492f6475b38be3b8c3a8dece7dd"
+    },
+    {
+      "filename": "4130_run_280_stress_time.png",
+      "sha256": "aaf0a16da11d63ce8eeb29ec05593a8381d2a1320663809936eef2b4a3d6d6bc"
+    },
+    {
+      "filename": "4130_run_280_stress_time.pdf",
+      "sha256": "9a31c030769e441d1701830ccdaeee987c1f730df89c177d64f1cfb7c2a1b33e"
+    }
+  ],
+  "units": {
+    "Load (N)": "N",
+    "Crosshead (mm)": "mm",
+    "Extensometer (mm)": "mm",
+    "Time (sec)": "s",
+    "Engineering stress (MPa)": "MPa (= N/mm²)"
+  },
+  "method": "Engineering stress = measured force / original rectangular area.",
+  "limitations": [
+    "Arithmetic agreement does not establish calibration, measurement uncertainty, experimental accuracy or standards compliance.",
+    "Units are checked through required column labels; physical units are not independently verified.",
+    "Negative readings are retained without smoothing, origin shifts or automatic deletion.",
+    "No strain, modulus, yield, fracture or true-stress properties are calculated.",
+    "This workflow supports the selected Sheet1/Sheet2 rectangular-specimen layout only.",
+    "Area and peak comparison tolerances reflect the selected workbook's displayed precision; other workbooks require a precision review."
+  ],
+  "row_count": 7438,
+  "time_range_s": [
+    1.9290000200271606,
+    150.67599487304688
+  ],
+  "negative_readings": {
+    "Load (N)": 1,
+    "Crosshead (mm)": 24,
+    "Extensometer (mm)": 72
+  },
+  "geometry": {
+    "width_mm": 13.5,
+    "thickness_mm": 3.2,
+    "calculated_area_mm2": 43.2,
+    "reported_area_mm2": 43.2,
+    "absolute_tolerance_mm2": 5e-05
+  },
+  "peak": {
+    "source_index": 5797,
+    "time_s": 117.87699890136719,
+    "load_n": 21002.25,
+    "calculated_stress_mpa": 486.1631944444444,
+    "reported_stress_mpa": 486.2,
+    "difference_mpa": -0.0368055555555884,
+    "absolute_tolerance_mpa": 0.05
+  },
+  "source_attribution": "FAIR Train: tensile testing data, doi:10.5281/zenodo.23424130 (CC BY 4.0). See docs/DATA_SOURCE.md for creator credits and provenance.",
+  "input": {
+    "filename": "4130_run_280.xlsx",
+    "sha256": "85a59c323532dfda4cb4288e32449b706ac00dad57d1479e88aaadc0a38ecc33",
+    "checksum_status": "pass"
+  },
+  "software": {
+    "python": "3.12.3",
+    "pandas": "3.1.0",
+    "numpy": "2.5.4",
+    "matplotlib": "3.11.2",
+    "openpyxl": "3.1.5"
+  }
+}

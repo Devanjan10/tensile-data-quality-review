@@ -26,12 +26,18 @@ outputs/*
 # Temporary LibreOffice lock files
 .~lock.*#
 
-# Selected reproducible portfolio outputs
-!outputs/1018_run_276_engineering_stress.csv
-!outputs/1018_run_276_stress_time.png
-!outputs/1018_run_276_stress_time.pdf
+# Selected reproducible portfolio reports
+!outputs/1018_run_276_review.md
+!outputs/1018_run_276_review.json
 
 # Selected reproducible portfolio outputs
 !outputs/1018_run_276_engineering_stress.csv
 !outputs/1018_run_276_stress_time.png
 !outputs/1018_run_276_stress_time.pdf
+
+# Second experimental specimen and review
+!outputs/4130_run_280_engineering_stress.csv
+!outputs/4130_run_280_stress_time.png
+!outputs/4130_run_280_stress_time.pdf
+!outputs/4130_run_280_review.md
+!outputs/4130_run_280_review.json

@@ -2,7 +2,10 @@ from pathlib import Path
 
 import pandas as pd
 
-from validation import validate_measurements
+if __package__:
+    from .validation import validate_measurements
+else:
+    from validation import validate_measurements
 
 
 project_root = Path(__file__).resolve().parents[1]

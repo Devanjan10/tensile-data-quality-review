@@ -1,0 +1,39 @@
+name: Tensile data review
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install pinned dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Check dependency compatibility
+        run: python -m pip check
+      - name: Verify experimental input checksum
+        working-directory: data/raw
+        run: sha256sum -c SHA256SUMS
+      - name: Run unit and integration tests
+        run: python -m unittest discover -v
+      - name: Generate both specimen reviews
+        run: |
+          python -m scripts.review
+          python -m scripts.review data/raw/4130_run_280.xlsx
+      - name: Save review reports and figures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tensile-review
+          path: outputs/
+          if-no-files-found: error

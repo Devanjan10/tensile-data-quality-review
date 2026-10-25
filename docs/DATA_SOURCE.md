@@ -28,6 +28,26 @@ Change: shortened filename only; workbook bytes unchanged. This workbook is expe
 
 The upstream README mentions CSV files and sheets; the actual selected file is an Excel `.xlsx` workbook. Do not use the CSV prototype's parser for it.
 
+## Second input: 4130 steel, run 280
+
+The second specimen was extracted byte-for-byte from the same learner-supplied
+archive. The archive SHA-256 was rechecked against the value above before
+extraction. No upstream analysis code was copied.
+
+Original archive member:
+
+```text
+TensileTestProject/data/dataClass2025/rawData/4130_2_Crosshead_Extensometer_displacement_S20 50mm Gage Length ASTM E8 Metals Tension (Extensometer-Crosshead) 280- Test Run 1-Test Run 1-Crosshead data.xlsx
+```
+
+Project path: `data/raw/4130_run_280.xlsx`.
+
+Workbook SHA-256: `85a59c323532dfda4cb4288e32449b706ac00dad57d1479e88aaadc0a38ecc33`.
+
+Change: shortened filename only; workbook bytes unchanged. The dataset credits,
+reuse terms and scientific limitations above apply to both inputs. Both
+checksums are recorded in `data/raw/SHA256SUMS`.
+
 ## Initial inspection notes, to reproduce locally
 
 - Sheet1 contains specimen metadata and source-reported results.
@@ -35,7 +55,11 @@ The upstream README mentions CSV files and sheets; the actual selected file is a
 - Sheet3 is empty in this selected workbook.
 - Load, crosshead displacement and extensometer readings are separate channels.
 
-These are inspection notes, not an implemented validation result. Reproduce them with the first read-only script before calculating properties. Preserve source-reported results separately from derived results.
+These notes were recorded during initial inspection. The current read-only
+inspection script is `python -m scripts.inspect_workbook`; the implemented
+validation and report workflow is `python -m scripts.review`. Source-reported
+properties remain separate from derived results. See the generated review for
+the current check outcomes and their limits.
 
 ## Scientific limits
 

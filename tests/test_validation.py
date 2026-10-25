@@ -1,5 +1,6 @@
 import unittest
 
+import numpy as np
 import pandas as pd
 
 from scripts.validation import validate_measurements
@@ -45,4 +46,34 @@ class ValidationTests(unittest.TestCase):
         changed.loc[1, "Load (N)"] = "sensor_error"
 
         with self.assertRaises(ValueError):
+            validate_measurements(changed)
+
+    def test_missing_columns_are_rejected(self):
+        for column in self.sample.columns:
+            with self.subTest(column=column):
+                with self.assertRaisesRegex(ValueError, "Missing required columns"):
+                    validate_measurements(self.sample.drop(columns=[column]))
+
+    def test_short_tables_are_rejected(self):
+        for rows in (0, 1):
+            with self.subTest(rows=rows):
+                with self.assertRaisesRegex(ValueError, "At least two"):
+                    validate_measurements(self.sample.iloc[:rows])
+
+    def test_decreasing_time_is_rejected_without_unsigned_overflow(self):
+        for dtype in (np.float64, np.int64, np.uint64):
+            with self.subTest(dtype=dtype):
+                changed = self.sample.copy(deep=True)
+                changed["Time (sec)"] = np.array([2, 1], dtype=dtype)
+                with self.assertRaisesRegex(ValueError, "Time must increase"):
+                    validate_measurements(changed)
+
+    def test_increasing_unsigned_time_is_preserved(self):
+        changed = self.sample.copy(deep=True)
+        changed["Time (sec)"] = np.array([0, np.iinfo(np.uint64).max], dtype=np.uint64)
+        pd.testing.assert_frame_equal(validate_measurements(changed), changed)
+
+    def test_duplicate_columns_are_rejected(self):
+        changed = pd.concat([self.sample, self.sample[["Load (N)"]]], axis=1)
+        with self.assertRaisesRegex(ValueError, "Duplicate column"):
             validate_measurements(changed)

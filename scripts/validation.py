@@ -9,6 +9,9 @@ def validate_measurements(measurements):
         "Extensometer (mm)", "Time (sec)",
     }
 
+    if measurements.columns.duplicated().any():
+        raise ValueError("Duplicate column names are not allowed.")
+
     missing = required - set(measurements.columns)
     if missing:
         raise ValueError(f"Missing required columns: {sorted(missing)}")
@@ -21,8 +24,9 @@ def validate_measurements(measurements):
     if not np.isfinite(numeric.to_numpy(dtype=float)).all():
         raise ValueError("Missing or infinite numerical values.")
 
-    time_steps = np.diff(numeric["Time (sec)"].to_numpy())
-    if not (time_steps > 0).all():
+    times = numeric["Time (sec)"].to_numpy()
+    # Compare directly: subtraction can wrap for unsigned timestamps.
+    if not (times[1:] > times[:-1]).all():
         raise ValueError("Time must increase strictly.")
 
     return numeric

@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "status": "pass_with_warnings",
+  "checks": [
+    {
+      "name": "input_checksum",
+      "status": "pass",
+      "message": "Compared bundled input bytes with data/raw/SHA256SUMS."
+    },
+    {
+      "name": "workbook_read",
+      "status": "pass",
+      "message": "Read Sheet1 metadata and Sheet2 measurements (header on Excel row 2)."
+    },
+    {
+      "name": "measurements",
+      "status": "pass",
+      "message": "Required labels, row count, finite numbers and strictly increasing time."
+    },
+    {
+      "name": "geometry",
+      "status": "pass",
+      "message": "Original area agrees with width × thickness within the absolute tolerance."
+    },
+    {
+      "name": "stress_calculation",
+      "status": "pass",
+      "message": "Calculated finite engineering stress from original area; existing stress, if present, agrees."
+    },
+    {
+      "name": "peak_comparison",
+      "status": "pass",
+      "message": "Peak stress agrees with the reported value within the absolute tolerance."
+    },
+    {
+      "name": "csv_round_trip",
+      "status": "pass",
+      "message": "Reloaded CSV exactly preserves the derived table."
+    },
+    {
+      "name": "figure_export",
+      "status": "pass",
+      "message": "Generated PNG and PDF from validated engineering stress."
+    }
+  ],
+  "warnings": [
+    {
+      "code": "negative_readings",
+      "column": "Load (N)",
+      "count": 57,
+      "message": "Load (N): 57 negative readings retained; contextual review needed."
+    },
+    {
+      "code": "negative_readings",
+      "column": "Extensometer (mm)",
+      "count": 23,
+      "message": "Extensometer (mm): 23 negative readings retained; contextual review needed."
+    }
+  ],
+  "artifacts": [
+    {
+      "filename": "1018_run_276_engineering_stress.csv",
+      "sha256": "4d8f5c7359b14b778651e1addff556d99c92adb81a96aee92e3d56dbc2790326"
+    },
+    {
+      "filename": "1018_run_276_stress_time.png",
+      "sha256": "c402149dcec7e1331d2a142af5edf646494f75da50a8d49964a835bcbdd02374"
+    },
+    {
+      "filename": "1018_run_276_stress_time.pdf",
+      "sha256": "5363cb7e610efd9ff71c51d38d56c524b2866794b93d680a5e4de58d1191ee93"
+    }
+  ],
+  "units": {
+    "Load (N)": "N",
+    "Crosshead (mm)": "mm",
+    "Extensometer (mm)": "mm",
+    "Time (sec)": "s",
+    "Engineering stress (MPa)": "MPa (= N/mm²)"
+  },
+  "method": "Engineering stress = measured force / original rectangular area.",
+  "limitations": [
+    "Arithmetic agreement does not establish calibration, measurement uncertainty, experimental accuracy or standards compliance.",
+    "Units are checked through required column labels; physical units are not independently verified.",
+    "Negative readings are retained without smoothing, origin shifts or automatic deletion.",
+    "No strain, modulus, yield, fracture or true-stress properties are calculated.",
+    "This workflow supports the selected Sheet1/Sheet2 rectangular-specimen layout only.",
+    "Area and peak comparison tolerances reflect the selected workbook's displayed precision; other workbooks require a precision review."
+  ],
+  "row_count": 4668,
+  "time_range_s": [
+    1.9270000457763672,
+    95.26300048828125
+  ],
+  "negative_readings": {
+    "Load (N)": 57,
+    "Crosshead (mm)": 0,
+    "Extensometer (mm)": 23
+  },
+  "geometry": {
+    "width_mm": 13.53,
+    "thickness_mm": 3.16,
+    "calculated_area_mm2": 42.7548,
+    "reported_area_mm2": 42.7548,
+    "absolute_tolerance_mm2": 5e-05
+  },
+  "peak": {
+    "source_index": 3322,
+    "time_s": 68.3740005493164,
+    "load_n": 17331.830078125,
+    "calculated_stress_mpa": 405.3774097440521,
+    "reported_stress_mpa": 405.4,
+    "difference_mpa": -0.02259025594787545,
+    "absolute_tolerance_mpa": 0.05
+  },
+  "source_attribution": "FAIR Train: tensile testing data, doi:10.5281/zenodo.23424130 (CC BY 4.0). See docs/DATA_SOURCE.md for creator credits and provenance.",
+  "input": {
+    "filename": "1018_run_276.xlsx",
+    "sha256": "27a62add1f93fcd25b7df88812bab6dbb33d1d9856216ff37191af5d587b4504",
+    "checksum_status": "pass"
+  },
+  "software": {
+    "python": "3.12.3",
+    "pandas": "3.1.0",
+    "numpy": "2.5.4",
+    "matplotlib": "3.11.2",
+    "openpyxl": "3.1.5"
+  }
+}
