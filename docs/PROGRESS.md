@@ -44,3 +44,18 @@ Implemented and run locally with AI guidance:
 These checks establish successful import, not experimental accuracy.
 Numerical validity, timestamps, specimen metadata and calculations
 remain to be checked.
+
+## Milestone 2 — reusable measurement validation
+
+- Connected the experimental-data reader to a reusable validation function.
+- The 4,668-row workbook passed the implemented column, row-count,
+  numerical-finiteness and strictly increasing time checks.
+- Preserved 57 negative load readings and 23 negative extensometer readings.
+- Four automated tests passed, covering preservation of finite negative
+  readings, repeated timestamps, nonfinite values and nonnumeric load text.
+- Confirmed that the original workbook checksum remains unchanged.
+
+Coverage limitations: missing-column, too-short-table and decreasing-time
+cases have not yet been tested independently. Plausible numerical errors,
+incorrect physical units and experimental accuracy are not established
+by these tests.
