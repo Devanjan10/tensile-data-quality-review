@@ -4,7 +4,17 @@ A student portfolio project on reproducible processing and quality assessment of
 
 ## Current status
 
-Repository setup only. The first real workbook and its attribution are included. No analysis program has been implemented in this repository yet. No experimental accuracy or standards compliance has been established.
+Implemented workbook inspection, measurement validation, original-area
+verification, engineering-stress calculation, CSV export and PNG/PDF plotting
+for one experimental specimen. Four measurement-validation tests pass.
+
+The calculated peak engineering stress is 405.3774 MPa, consistent with
+the source-reported 405.4 MPa at its displayed rounding precision.
+Experimental accuracy and standards compliance have not been established.
+
+![Engineering stress versus recorded time](outputs/1018_run_276_stress_time.png)
+
+See [methods, findings and limitations](docs/ANALYSIS_NOTES.md).
 
 ## First question
 
