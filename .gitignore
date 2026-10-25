@@ -22,3 +22,6 @@ __MACOSX/
 # Regenerable outputs; selected portfolio figures can later be added explicitly
 outputs/*
 !outputs/.gitkeep
+
+# Temporary LibreOffice lock files
+.~lock.*#
